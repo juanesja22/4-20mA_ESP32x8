@@ -222,7 +222,6 @@ input[type="range"].ao-range:active::-webkit-slider-thumb {
 }
 </style>
 <base target="_blank">
-<base target="_blank">
 </head>
 <body>
 
@@ -486,8 +485,10 @@ async function toggleConnection() {
   setStatus('connecting');
   try {
     bleDevice = await navigator.bluetooth.requestDevice({
-      filters: [{ name: BLE_NAME }],
-      optionalServices: [SERVICE_UUID]
+      filters: [
+        { name: BLE_NAME },
+        { services: [SERVICE_UUID] }
+      ]
     });
     bleDevice.addEventListener('gattserverdisconnected', () => {
       setStatus('off');
